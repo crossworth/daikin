@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Daikin informações da conta - github.com/crossworth/daikin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+          rel="stylesheet">
+    <style>
+      * {
+        font-family: "JetBrains Mono", serif;
+        font-optical-sizing: auto;
+      }
+    </style>
+</head>
+<body>
+<div class="w-screen h-screen flex items-center pt-4 flex-col">
+    <div>
+        <h1 class="mb-4 text-xl font-extrabold leading-none tracking-tight text-gray-900 text-center">
+            Daikin informações da conta - <a href="https://github.com/crossworth/daikin" target="_blank">github.com/crossworth/daikin</a>
+        </h1>
+    </div>
+    <div class="mt-4 min-w-[400px] w-full max-w-[800px]">
+        <div class="px-4">
+            {{ template "child" . }}
+        </div>
+    </div>
+</div>
+</body>
+</html>

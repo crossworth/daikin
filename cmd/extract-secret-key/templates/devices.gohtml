@@ -1,0 +1,20 @@
+{{ define "child" }}
+    <div class="max-w-[800px] m-auto">
+        <div class="mb-4">
+            <h2 class="block font-extrabold text-gray-700 mb-2">Dispositivos</h2>
+
+            {{ range .Things }}
+                <li>
+                    <strong>ID:</strong> {{ .ThingID }} | <strong>Nome:</strong> {{ .ThingName }} |
+                    <strong>SecretKey:</strong> <input type="text" class="w-[300px] px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly value="{{ .SecretKey }}"/>
+                </li>
+            {{ end }}
+
+        </div>
+        <div class="mb-4">
+            <label for="raw" class="block font-extrabold text-gray-700 mb-2">Resultado completo (JSON)</label>
+            <textarea id="raw" readonly rows="8"
+                      class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700">{{ .Raw }}</textarea>
+        </div>
+    </div>
+{{ end }}

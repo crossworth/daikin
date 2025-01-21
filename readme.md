@@ -15,7 +15,7 @@ possível instalar o aplicativo em diferentes dispositivos e controlar o mesmo a
 
 ### Status
 
-- [ ] Suporte a extrair o `secret key` utilizando login e senha.
+- [x] Suporte a extrair o `secret key` utilizando login e senha.
 - [ ] Suporte a configurar o ar-condicionado sem necessidade de aplicativo.
 - [x] Consultar status do ar-condicionado (servidor http).
 - [ ] Enviar comandos para o ar-condicionado (servidor http).
@@ -44,7 +44,7 @@ Deve ser compatível com todos os aparelhos que utilizam o aplicativo **Daikin S
 | Unidade interna | Status         |
 |-----------------|----------------|
 | FTKP09S5VL      | Deve funcionar |
-| FTKP12S5VL      | Deve funcionar |
+| FTKP12S5VL      | Funcionando    |
 | FTKP18S5VL      | Deve funcionar |
 | FTKP24S5VL      | Deve funcionar |
 | FTHP09S5VL      | Deve funcionar |
@@ -54,7 +54,18 @@ Deve ser compatível com todos os aparelhos que utilizam o aplicativo **Daikin S
 
 ### Conseguindo uma `secret key`
 
-Atualmente a única forma de conseguir uma `secret key` é inspecionando as requests que o aplicativo oficial faz.
+O primeiro passo é configurar o ar utilizando o aplicativo oficial, durante o processo de configuração é criado
+a `secret key`.
+
+Depois disso, você pode conseguir a `secret key` de duas formas, inspecionando as requests que o
+aplicativo oficial faz, especificamente para o endpoint `https://dmb.iotalabs.co.in/devices/thinginfo/managething`.
+
+Você também pode utilizar o seguinte
+site [https://daikin-extract-secret-key.fly.dev/](https://daikin-extract-secret-key.fly.dev/).
+O código do serviço está presente em `cmd/extract-secret-key` e nenhuma informação de login/senha/dispositivo é
+coletada.
+
+Você também pode executar o serviço localmente.
 
 ### Engenharia reversa
 
@@ -68,7 +79,7 @@ dado local, toda vez que o aplicativo é aberto ou restaurado (`onResume`) ele f
 o [Amazon Cognito](https://aws.amazon.com/pt/cognito/) para validar o cadastro do usuário e além de fazer requests para
 verificar a versão do aplicativo.
 
-Os servidores AWS utilizados ficam nos Estados Unidos e na Europa, tornando as requests ainda mais lentas.
+Os servidores AWS utilizados ficam nos Estados Unidos, tornando as requests ainda mais lentas.
 
 Depois das requests de autenticação de usuário é feito uma request para uma api hospedado também na AWS de gerenciamento
 de IOT, enviando o token e recebendo os dados dos aparelhos cadastrados na conta. É feito tracking de versões do

@@ -118,7 +118,7 @@ Quando mandando uma mensagem criptografada devemos adicionar `BZ` ao final do pa
 
 Existem diversos exemplos de código de comunicação com servidor local:
 
-- Programa de terminal que exibe o estado do ar em loop [`/cmd/daikin-smart-ac`](/cmd/daikin-smart-ac).
+- Programa de terminal que exibe o estado do ar em loop [`/cmd/ac-server-read-loop`](/cmd/ac-server-read-loop).
 - Serviço http que retorna estado do ar na porta 8080 [`/cmd/ac-server-http-service`](/cmd/ac-server-http-service).
     - `GET /`: Retorna um JSON com o estado do ar.
     - `POST /state`: Aceita um JSON com o estado desejado para o ar.

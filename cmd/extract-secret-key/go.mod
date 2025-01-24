@@ -3,14 +3,9 @@ module github.com/crossworth/daikin/ecmd/extract-secret-key
 go 1.23.4
 
 require (
-	github.com/crossworth/daikin/aws v0.0.0-00010101000000-000000000000
-	github.com/crossworth/daikin/iotalabs v0.0.0-00010101000000-000000000000
+	github.com/crossworth/daikin/aws v0.0.0-20250124001946-3385b3802534
+	github.com/crossworth/daikin/iotalabs v0.0.0-20250124001946-3385b3802534
 	github.com/tidwall/gjson v1.18.0
-)
-
-replace (
-	github.com/crossworth/daikin/aws => ../../aws
-	github.com/crossworth/daikin/iotalabs => ../../iotalabs
 )
 
 require (

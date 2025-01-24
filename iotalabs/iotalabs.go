@@ -1,4 +1,4 @@
-package main
+package iotalabs
 
 import (
 	"context"
@@ -14,8 +14,8 @@ const (
 	iotalabsUserAgent = "okhttp/5.0.0-alpha.2"
 )
 
-// managething returns the output of calling [iotalabsEndpoint].
-func managething(ctx context.Context, username string, accessToken string, idToken string) (string, error) {
+// ManageThing returns the output of calling [iotalabsEndpoint].
+func ManageThing(ctx context.Context, username string, accessToken string, idToken string) (string, error) {
 	body := strings.NewReader(`{"request_type":"GET_THING_INFO","json_request":{},"user_name":"` + username + `","access_token":"` + accessToken + `"}`)
 	req, err := http.NewRequestWithContext(ctx, http.MethodPost, iotalabsEndpoint, body)
 	if err != nil {

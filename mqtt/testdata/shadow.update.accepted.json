@@ -1,0 +1,24 @@
+{
+  "state": {
+    "desired": {
+      "port1": {
+        "power": 1
+      },
+      "src": 5
+    }
+  },
+  "metadata": {
+    "desired": {
+      "port1": {
+        "power": {
+          "timestamp": 1737665782
+        }
+      },
+      "src": {
+        "timestamp": 1737665782
+      }
+    }
+  },
+  "version": 2607,
+  "timestamp": 1737665782
+}

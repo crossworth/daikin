@@ -62,7 +62,7 @@ loop:
 		case <-serviceContext.Done():
 			break loop
 		case <-time.After(1 * time.Second):
-			acStatusResp, err := client.ACStatus(serviceContext)
+			acStatusResp, err := client.State(serviceContext)
 			if err != nil {
 				_, _ = fmt.Fprintf(writer, "Erro ao ler o status do AC: %v\n", err)
 			} else {

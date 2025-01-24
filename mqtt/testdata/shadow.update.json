@@ -1,0 +1,10 @@
+{
+  "state": {
+    "desired": {
+      "port1": {
+        "power": 1
+      },
+      "src": 5
+    }
+  }
+}

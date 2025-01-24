@@ -1,0 +1,112 @@
+{
+  "state": {
+    "reported": {
+      "connected": 2,
+      "src": 1,
+      "port1": {
+        "power": 1,
+        "mode": 3,
+        "temperature": 24.0,
+        "fan": 17,
+        "h_swing": 0,
+        "v_swing": 0,
+        "coanda": 1,
+        "econo": 1,
+        "powerchill": 0,
+        "good_sleep": 0,
+        "streamer": 0,
+        "out_quite": 0,
+        "on_timer_set": 0,
+        "on_timer_value": 0,
+        "off_timer_set": 0,
+        "off_timer_value": 0,
+        "sensors": {
+          "room_temp": 25.0,
+          "out_temp": 26.0
+        },
+        "rst_r": 12,
+        "fw_ver": "p1.0.3.28"
+      },
+      "ac_unit_type": "HEAT_PUMP"
+    }
+  },
+  "metadata": {
+    "reported": {
+      "connected": {
+        "timestamp": 1737665977
+      },
+      "src": {
+        "timestamp": 1737665977
+      },
+      "port1": {
+        "power": {
+          "timestamp": 1737665977
+        },
+        "mode": {
+          "timestamp": 1737665977
+        },
+        "temperature": {
+          "timestamp": 1737665977
+        },
+        "fan": {
+          "timestamp": 1737665977
+        },
+        "h_swing": {
+          "timestamp": 1737665977
+        },
+        "v_swing": {
+          "timestamp": 1737665977
+        },
+        "coanda": {
+          "timestamp": 1737665977
+        },
+        "econo": {
+          "timestamp": 1737665977
+        },
+        "powerchill": {
+          "timestamp": 1737665977
+        },
+        "good_sleep": {
+          "timestamp": 1737665977
+        },
+        "streamer": {
+          "timestamp": 1737665977
+        },
+        "out_quite": {
+          "timestamp": 1737665977
+        },
+        "on_timer_set": {
+          "timestamp": 1737665977
+        },
+        "on_timer_value": {
+          "timestamp": 1737665977
+        },
+        "off_timer_set": {
+          "timestamp": 1737665977
+        },
+        "off_timer_value": {
+          "timestamp": 1737665977
+        },
+        "sensors": {
+          "room_temp": {
+            "timestamp": 1737665977
+          },
+          "out_temp": {
+            "timestamp": 1737665977
+          }
+        },
+        "rst_r": {
+          "timestamp": 1737665977
+        },
+        "fw_ver": {
+          "timestamp": 1737665977
+        }
+      },
+      "ac_unit_type": {
+        "timestamp": 1706825292
+      }
+    }
+  },
+  "version": 2637,
+  "timestamp": 1737666573
+}

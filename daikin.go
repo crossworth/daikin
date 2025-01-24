@@ -2,6 +2,7 @@ package daikin
 
 import (
 	"context"
+	"crypto/rand"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -9,6 +10,7 @@ import (
 	"net/url"
 	"time"
 
+	"github.com/crossworth/daikin/types"
 	"github.com/valyala/fasthttp"
 )
 
@@ -27,7 +29,7 @@ func NewClient(target *url.URL, secretKey []byte) *Client {
 }
 
 // makes a request to the given path returning the response as a byte slice.
-func (c *Client) makeRequest(ctx context.Context, method string, path string) ([]byte, error) {
+func (c *Client) makeRequest(ctx context.Context, method string, path string, body []byte) ([]byte, error) {
 	// we have to use a custom http client because the server sends invalid http responses
 	// example below:
 	//  	HTTP/1.1 200 OK
@@ -43,6 +45,9 @@ func (c *Client) makeRequest(ctx context.Context, method string, path string) ([
 	req.SetRequestURI(endpoint)
 	req.Header.SetMethod(method)
 	req.SetTimeout(30 * time.Second)
+	if len(body) > 0 {
+		req.SetBody(body)
+	}
 	if err := fasthttp.Do(req, resp); err != nil {
 		return nil, fmt.Errorf("making request to %q: %w", endpoint, err)
 	}
@@ -56,26 +61,62 @@ func (c *Client) makeRequest(ctx context.Context, method string, path string) ([
 	return data, nil
 }
 
-// decodeResponse decodes the response.
-func (c *Client) decodeResponse(data []byte) (json.RawMessage, error) {
+// decodeData decodes the given data using the given secretKey.
+func decodeData(secretKey []byte, data []byte, path string) ([]byte, error) {
 	if len(data) < 16+2 {
 		return nil, fmt.Errorf("input data is too short to contain a payload")
 	}
 	var (
+		startPayload = 16
+		hasLength    = false
+	)
+	switch path {
+	case "acstatus":
+		startPayload = 17
+	case "get_scan", "status", "onboard":
+		startPayload = 17
+		hasLength = true
+	}
+	var (
 		iv         = data[:16]
-		payload    = data[17 : len(data)-2]
+		length     = data[16] & 255
+		payload    = data[startPayload : len(data)-2]
 		crc16Bytes = data[len(data)-2:]
 		crc16      = (int(crc16Bytes[1]&255) << 8) | int(crc16Bytes[0]&255)
 		crc16Check = calculateCRC16(data[:len(data)-2]) & 65535
 	)
+	_, _ = length, hasLength // not used for now, we don't know what it means or if is required
 	if crc16 != crc16Check {
 		return nil, fmt.Errorf("invalid crc16")
 	}
-	decoded, err := decryptAESCFB(payload, c.secretKey, iv)
+	decoded, err := decryptAESCFB(payload, secretKey, iv)
 	if err != nil {
 		return nil, fmt.Errorf("decoding payload, check the secret key")
 	}
 	return decoded, nil
+}
+
+// encodeData encodes the given data using the secretKey.
+func encodeData(secretKey []byte, data []byte) ([]byte, error) {
+	var (
+		iv        = make([]byte, 16)
+		inputData = make([]byte, 0, len(data)+2)
+	)
+	if _, err := rand.Read(iv); err != nil {
+		return nil, fmt.Errorf("generating IV: %w", err)
+	}
+	inputData = append(inputData, data...)
+	inputData = append(inputData, []byte("BZ")...) // not sure why we should encode the BZ here
+	encrypted, err := encryptAESCFB(inputData, secretKey, iv)
+	if err != nil {
+		return nil, fmt.Errorf("encrypt data: %w", err)
+	}
+	output := make([]byte, 0, len(encrypted)+18) // 16 bytes iv + 2 bytes crc16
+	output = append(output, iv...)
+	output = append(output, encrypted...)
+	crc16 := calculateCRC16(output)
+	output = append(output, byte(crc16&255), byte(crc16>>8)&255)
+	return output, nil
 }
 
 type StatusResponse struct {
@@ -93,11 +134,11 @@ type Status struct {
 
 // Status query for the device status.
 func (c *Client) Status(ctx context.Context) (*StatusResponse, error) {
-	data, err := c.makeRequest(ctx, http.MethodGet, "/status")
+	data, err := c.makeRequest(ctx, http.MethodGet, "/status", nil)
 	if err != nil {
 		return nil, err
 	}
-	decoded, err := c.decodeResponse(data)
+	decoded, err := decodeData(c.secretKey, data, "status")
 	if err != nil {
 		return nil, fmt.Errorf("decoding response: %w", err)
 	}
@@ -108,91 +149,51 @@ func (c *Client) Status(ctx context.Context) (*StatusResponse, error) {
 	return &resp, nil
 }
 
-type ACStatus struct {
-	Port1 Port `json:"port1"`
-	Idu   int  `json:"idu"`
+type State struct {
+	Port1 types.Port `json:"port1"`
+	Idu   int        `json:"idu"`
 }
 
-type Mode int
-
-func (m Mode) String() string {
-	switch m {
-	case 0:
-		return "Automático"
-	case 2:
-		return "Desumidificar"
-	case 3:
-		return "Resfriar"
-	case 4:
-		return "Aquecer"
-	case 6:
-		return "Ventilar"
-	default:
-		return fmt.Sprintf("%d", m)
-	}
-}
-
-type Fan int
-
-func (f Fan) String() string {
-	switch f {
-	case 3:
-		return "Baixa"
-	case 4:
-		return "Média-Baixa"
-	case 5:
-		return "Média"
-	case 6:
-		return "Média-Alta"
-	case 7:
-		return "Alta"
-	case 17:
-		return "Automático"
-	case 18:
-		return "Silencioso"
-	default:
-		return fmt.Sprintf("%d", f)
-	}
-}
-
-type Port struct {
-	Power         int     `json:"power"`
-	Mode          Mode    `json:"mode"`
-	Temperature   float64 `json:"temperature"`
-	Fan           Fan     `json:"fan"`
-	HSwing        int     `json:"h_swing"`
-	VSwing        int     `json:"v_swing"`
-	Coanda        int     `json:"coanda"`
-	Econo         int     `json:"econo"`
-	Powerchill    int     `json:"powerchill"`
-	GoodSleep     int     `json:"good_sleep"`
-	Streamer      int     `json:"streamer"`
-	OutQuite      int     `json:"out_quite"`
-	OnTimerSet    int     `json:"on_timer_set"`
-	OnTimerValue  int     `json:"on_timer_value"`
-	OffTimerSet   int     `json:"off_timer_set"`
-	OffTimerValue int     `json:"off_timer_value"`
-	Sensors       Sensors `json:"sensors"`
-	RstR          int     `json:"rst_r"`
-	FWVer         string  `json:"fw_ver"`
-}
-
-type Sensors struct {
-	RoomTemp float64 `json:"room_temp"`
-	OutTemp  float64 `json:"out_temp"`
-}
-
-// ACStatus query for the ac status.
-func (c *Client) ACStatus(ctx context.Context) (*ACStatus, error) {
-	data, err := c.makeRequest(ctx, http.MethodGet, "/acstatus")
+// State query for the device state.
+func (c *Client) State(ctx context.Context) (*State, error) {
+	data, err := c.makeRequest(ctx, http.MethodGet, "/acstatus", nil)
 	if err != nil {
 		return nil, err
 	}
-	decoded, err := c.decodeResponse(data)
+	decoded, err := decodeData(c.secretKey, data, "acstatus")
 	if err != nil {
 		return nil, fmt.Errorf("decoding response: %w", err)
 	}
-	var resp ACStatus
+	var resp State
+	if err := json.Unmarshal(decoded, &resp); err != nil {
+		return nil, fmt.Errorf("decoding json: %w", err)
+	}
+	return &resp, nil
+}
+
+type DesiredState struct {
+	Port1 types.PortState `json:"port1"`
+}
+
+// SetState sets the desired state on the device.
+func (c *Client) SetState(ctx context.Context, state DesiredState) (*State, error) {
+	jsonState, err := json.Marshal(state)
+	if err != nil {
+		return nil, fmt.Errorf("encoding json: %w", err)
+	}
+	stateData, err := encodeData(c.secretKey, jsonState)
+	if err != nil {
+		return nil, fmt.Errorf("encoding desired state: %w", err)
+	}
+	data, err := c.makeRequest(ctx, http.MethodPost, "/acstatus", []byte(base64.StdEncoding.EncodeToString(stateData)))
+	if err != nil {
+		return nil, err
+	}
+	decoded, err := decodeData(c.secretKey, data, "acstatus")
+	if err != nil {
+		return nil, fmt.Errorf("decoding response: %w", err)
+	}
+	var resp State
 	if err := json.Unmarshal(decoded, &resp); err != nil {
 		return nil, fmt.Errorf("decoding json: %w", err)
 	}

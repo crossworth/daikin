@@ -1,17 +1,19 @@
-module github.com/crossworth/daikin/ecmd/extract-secret-key
+module github.com/crossworth/daikin/cmd/mqtt-test
 
 go 1.23.4
 
 require (
-	github.com/crossworth/daikin/aws v0.0.0-00010101000000-000000000000
-	github.com/crossworth/daikin/iotalabs v0.0.0-00010101000000-000000000000
-	github.com/tidwall/gjson v1.18.0
+	github.com/crossworth/daikin/mqtt v0.0.0-00010101000000-000000000000
+	github.com/eclipse/paho.mqtt.golang v1.5.0 // indirect
 )
 
 replace (
 	github.com/crossworth/daikin/aws => ../../aws
-	github.com/crossworth/daikin/iotalabs => ../../iotalabs
+	github.com/crossworth/daikin/mqtt => ../../mqtt
+	github.com/crossworth/daikin/types => ../../types
 )
+
+require github.com/crossworth/daikin/aws v0.0.0-00010101000000-000000000000
 
 require (
 	github.com/alexrudd/cognito-srp/v4 v4.1.0 // indirect
@@ -30,6 +32,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.28.10 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.33.9 // indirect
 	github.com/aws/smithy-go v1.22.1 // indirect
-	github.com/tidwall/match v1.1.1 // indirect
-	github.com/tidwall/pretty v1.2.0 // indirect
+	github.com/crossworth/daikin/types v0.0.0-00010101000000-000000000000 // indirect
+	github.com/google/uuid v1.6.0 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
+	golang.org/x/net v0.27.0 // indirect
+	golang.org/x/sync v0.7.0 // indirect
 )

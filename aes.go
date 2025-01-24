@@ -6,13 +6,29 @@ import (
 	"fmt"
 )
 
+func encryptAESCFB(plaintext, key, iv []byte) ([]byte, error) {
+	block, err := aes.NewCipher(key)
+	if err != nil {
+		return nil, err
+	}
+	if len(iv) != aes.BlockSize {
+		return nil, fmt.Errorf("invalid IV size: must be %d bytes", aes.BlockSize)
+	}
+	var (
+		mode       = cipher.NewCFBEncrypter(block, iv)
+		ciphertext = make([]byte, len(plaintext))
+	)
+	mode.XORKeyStream(ciphertext, plaintext)
+	return ciphertext, nil
+}
+
 func decryptAESCFB(ciphertext, key, iv []byte) ([]byte, error) {
 	block, err := aes.NewCipher(key)
 	if err != nil {
 		return nil, err
 	}
-	if len(ciphertext) < aes.BlockSize {
-		return nil, fmt.Errorf("ciphertext is too short")
+	if len(iv) != aes.BlockSize {
+		return nil, fmt.Errorf("invalid IV size: must be %d bytes", aes.BlockSize)
 	}
 	var (
 		mode      = cipher.NewCFBDecrypter(block, iv)

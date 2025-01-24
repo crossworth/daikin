@@ -3,13 +3,40 @@
         <div class="mb-4">
             <h2 class="block font-extrabold text-gray-700 mb-2">Dispositivos</h2>
 
-            {{ range .Things }}
-                <li>
-                    <strong>ID:</strong> {{ .ThingID }} | <strong>Nome:</strong> {{ .ThingName }} |
-                    <strong>SecretKey:</strong> <input type="text" class="w-[300px] px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" readonly value="{{ .SecretKey }}"/>
-                </li>
-            {{ end }}
+            <ul class="list-disc">
+                {{ range .Things }}
+                    <li>
+                        <strong>ID:</strong> {{ .ThingID }} | <strong>Nome:</strong> {{ .ThingName }} |
+                        <strong>SecretKey:</strong> <input
+                                onclick="this.select()"
+                                type="text"
+                                class="w-[300px] px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                                readonly value="{{ .SecretKey }}"/>
+                    </li>
+                {{ end }}
+            </ul>
 
+        </div>
+        <div class="mb-4">
+            <h2 class="block font-extrabold text-gray-700 mb-2">MQTT</h2>
+
+            <ul class="list-disc">
+                <li class="my-1"><strong>AccessKeyID:</strong><input
+                            onclick="this.select()"
+                            type="text"
+                            class="w-[300px] px-3 py-1 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            readonly value="{{ .MQTTInfo.AccessKeyID }}"/></li>
+                <li class="my-1"><strong>SecretKey:</strong><input
+                            onclick="this.select()"
+                            type="text"
+                            class="w-[300px] px-3 py-1 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            readonly value="{{ .MQTTInfo.SecretKey }}"/></li>
+                <li class="my-1"><strong>SessionToken:</strong><input
+                            onclick="this.select()"
+                            type="text"
+                            class="w-[300px] px-3 py-1 rounded-md border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                            readonly value="{{ .MQTTInfo.SessionToken }}"/></li>
+            </ul>
         </div>
         <div class="mb-4">
             <label for="raw" class="block font-extrabold text-gray-700 mb-2">Resultado completo (JSON)</label>

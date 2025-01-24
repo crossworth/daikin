@@ -1,5 +1,4 @@
 FROM golang:1.23-bullseye AS build
-ARG SERVICE_VERSION=0
 WORKDIR /app
 COPY go.mod /app/go.mod
 COPY go.sum /app/go.sum

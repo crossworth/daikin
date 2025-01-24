@@ -24,7 +24,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /", indexHandler)
-	mux.HandleFunc("POST /info", accountInfoHandler())
+	mux.HandleFunc("POST /info", accountInfoHandler)
 
 	var (
 		httpServer = &http.Server{

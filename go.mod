@@ -3,13 +3,11 @@ module github.com/crossworth/daikin
 go 1.23.4
 
 require (
-	github.com/crossworth/daikin/types v0.0.0-00010101000000-000000000000
+	github.com/crossworth/daikin/types v0.0.0-20250124003104-9f6d52a59699
 	github.com/gosuri/uilive v0.0.4
 	github.com/stretchr/testify v1.8.4
 	github.com/valyala/fasthttp v1.51.0
 )
-
-replace github.com/crossworth/daikin/types => ./types
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect

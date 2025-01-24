@@ -160,7 +160,7 @@ dispositivo._
 
 ```shell
 
-docker run ghcr.io/crossworth/daikin:latest /app/daikin -secretKey=<SecretKey> -targetAddress=http://192.168.0.71:15914/ get
+docker run --rm ghcr.io/crossworth/daikin:latest /app/daikin -secretKey=<SecretKey> -targetAddress=http://192.168.0.71:15914/ get
 {
   "port1": {
     "power": 1,
@@ -193,7 +193,7 @@ docker run ghcr.io/crossworth/daikin:latest /app/daikin -secretKey=<SecretKey> -
 
 ```shell
 
-docker run -p 8080:8080 ghcr.io/crossworth/daikin:latest /app/ac-server-http-service -secretKey=<SecretKey> -targetAddress=http://192.168.0.71:15914/
+docker run --rm -p 8080:8080 ghcr.io/crossworth/daikin:latest /app/ac-server-http-service -secretKey=<SecretKey> -targetAddress=http://192.168.0.71:15914/
 2025/01/24 00:13:06 starting http server at :8080
 
 

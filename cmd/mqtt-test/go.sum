@@ -30,6 +30,12 @@ github.com/aws/aws-sdk-go-v2/service/sts v1.33.9 h1:BRVDbewN6VZcwr+FBOszDKvYeXY1
 github.com/aws/aws-sdk-go-v2/service/sts v1.33.9/go.mod h1:f6vjfZER1M17Fokn0IzssOTMT2N8ZSq+7jnNF0tArvw=
 github.com/aws/smithy-go v1.22.1 h1:/HPHZQ0g7f4eUeK6HKglFz8uwVfZKgoI25rb/J+dnro=
 github.com/aws/smithy-go v1.22.1/go.mod h1:irrKGvNn1InZwb2d7fkIRNucdfwR8R+Ts3wxYa/cJHg=
+github.com/crossworth/daikin/aws v0.0.0-20250124003104-9f6d52a59699 h1:ilPQdl1tA6GvIxHy6SoxCgDWZJqXM6OpThNgoPSQwyo=
+github.com/crossworth/daikin/aws v0.0.0-20250124003104-9f6d52a59699/go.mod h1:RgAOPnGz37tzOb8H0sHflOISQ2Q1os9nWzCoICe01Fg=
+github.com/crossworth/daikin/mqtt v0.0.0-20250124003104-9f6d52a59699 h1:MyuKTqbXDJqF1qHjAVF8jDIoMN3HgDEFuznM5p3ml0A=
+github.com/crossworth/daikin/mqtt v0.0.0-20250124003104-9f6d52a59699/go.mod h1:FVEVcOoHD1mqJcc9ZCugwRQunfEUwn5JCqfoSjOuPAE=
+github.com/crossworth/daikin/types v0.0.0-20250124003104-9f6d52a59699 h1:lrBX7DpVrUrExSwQ5pwivVFHfUGQau1SQLHCgquo9Q8=
+github.com/crossworth/daikin/types v0.0.0-20250124003104-9f6d52a59699/go.mod h1:sziSITtR7wtKGhthuJz0EjtGbuITUup0ytzoOdATVlY=
 github.com/eclipse/paho.mqtt.golang v1.5.0 h1:EH+bUVJNgttidWFkLLVKaQPGmkTUfQQqjOsyvMGvD6o=
 github.com/eclipse/paho.mqtt.golang v1.5.0/go.mod h1:du/2qNQVqJf/Sqs4MEL77kR8QTqANF7XU7Fk0aOTAgk=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=

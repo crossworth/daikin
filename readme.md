@@ -38,9 +38,9 @@ Deve ser compatível com todos os aparelhos que utilizam o aplicativo **Daikin S
 | FTKP12Q5VL      | Deve funcionar |
 | FTKP18Q5VL      | Deve funcionar |
 | FTKP24Q5VL      | Deve funcionar |
-| FTHP09Q5VL      | Deve funcionar |
+| FTHP09Q5VL      | Funcionando    |
 | FTHP12Q5VL      | Deve funcionar |
-| FTHP18Q5VL      | Deve funcionar |
+| FTHP18Q5VL      | Funcionando    |
 | FTHP24Q5VL      | Deve funcionar |
 
 #### Daikin Split EcoSwing Smart Gold R-32:

@@ -56,6 +56,14 @@ Deve ser compatível com todos os aparelhos que utilizam o aplicativo **Daikin S
 | FTHP18S5VL      | Deve funcionar |
 | FTHP24S5VL      | Deve funcionar |
 
+#### Possívelmente funciona (unidades voltadas para o mercado da Índia)
+
+| Modelo  |
+|---------|
+| FTKR35U |
+| FTKR50U |
+| FTKR60U |
+
 ### Conseguindo uma `secret key`
 
 O primeiro passo é configurar o ar utilizando o aplicativo oficial, durante o processo de configuração é criado
@@ -92,9 +100,9 @@ O servidor de registros dispositivos armazena diversos dados do dispositivo, é 
 Android, timezone, linguagem, localização (latitude, longitude), modelo dos aparelhos de ar-condicionado e também alguns
 dados da rede wireless (como nome).
 
-O aplicativo parece ser feito por uma [empresa da India](http://iotalabs.co.in/) (o que não faz muito sentido para um
-produto feito para o mercado brasileiro). É possível ver que o aplicativo não é uma solução whitelabel, já que em
-diversas partes é hardcoded o domínio `daikin.com.br`.
+O aplicativo parece ser uma cópia
+do [Daikin AC Manager-India](https://play.google.com/store/apps/details?id=in.co.iotalabs.daikin.smartac&hl=pt_BR)
+feito pelo [iota labs](http://iotalabs.co.in/) e adaptado para o mercado brasileiro.
 
 O aplicativo tem uma usabilidade terrível, com controles lentos e capacidades básicas.
 
@@ -152,7 +160,6 @@ _O exemplo acima trabalha com login e senha da conta criada no aplicativo móvel
 informações com servidores da AWS, também é preciso saber o ID do dispositivo (`thingID`) antes, você
 pode [https://daikin-extract-secret-key.fly.dev/](https://daikin-extract-secret-key.fly.dev/) para conseguir o ID do
 dispositivo._
-
 
 #### Docker
 

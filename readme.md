@@ -53,7 +53,7 @@ Deve ser compatível com todos os aparelhos que utilizam o aplicativo **Daikin S
 | FTKP24S5VL      | Deve funcionar |
 | FTHP09S5VL      | Deve funcionar |
 | FTHP12S5VL      | Funcionando    |
-| FTHP18S5VL      | Deve funcionar |
+| FTHP18S5VL      | Funcionando    |
 | FTHP24S5VL      | Deve funcionar |
 
 #### Possívelmente funciona (unidades voltadas para o mercado da Índia)

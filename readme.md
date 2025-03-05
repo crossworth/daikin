@@ -19,6 +19,7 @@ servidor MQTT para comunicação.
 
 ### Status
 
+- [x] Encontrar dispositivos na rede.
 - [x] Suporte a extrair o `secret key` utilizando login e senha.
 - [ ] Suporte a configurar o ar-condicionado sem necessidade de aplicativo.
 - [x] Consultar estado do ar-condicionado (servidor http).

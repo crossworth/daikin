@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -eu
+
 env CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o ./build/daikin-windows-32.exe ./cmd/daikin/
 env CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o ./build/daikin-windows-64.exe ./cmd/daikin/
 env CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -o ./build/daikin-linux-arm ./cmd/daikin/

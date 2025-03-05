@@ -123,6 +123,10 @@ processo de descriptografia.
 
 Quando mandando uma mensagem criptografada devemos adicionar `BZ` ao final do payload por algum motivo obscuro.
 
+#### Encontrar dispositivos na rede local
+
+É possível encontrar dispositivos na rede local utilizando o programa  [`/cmd/find-devices`](/cmd/find-devices).
+
 #### Comunicação pelo servidor http (funciona somente dentro da rede local)
 
 Existem diversos exemplos de código de comunicação com servidor local:

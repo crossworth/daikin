@@ -35,11 +35,11 @@ Deve ser compatível com todos os aparelhos que utilizam o aplicativo **Daikin S
 | Unidade interna | Status         |
 |-----------------|----------------|
 | FTKP09Q5VL      | Deve funcionar |
-| FTKP12Q5VL      | Deve funcionar |
+| FTKP12Q5VL      | Funcionando    |
 | FTKP18Q5VL      | Deve funcionar |
 | FTKP24Q5VL      | Deve funcionar |
 | FTHP09Q5VL      | Funcionando    |
-| FTHP12Q5VL      | Deve funcionar |
+| FTHP12Q5VL      | Funcionando    |
 | FTHP18Q5VL      | Funcionando    |
 | FTHP24Q5VL      | Deve funcionar |
 

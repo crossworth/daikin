@@ -84,3 +84,17 @@ func processEntry(entry *zeroconf.ServiceEntry) (Device, bool) {
 		IP:       entry.AddrIPv4[0],
 	}, true
 }
+
+// ConvertAPNToThingAPN converts the APN received on the DiscoveryDevices for the ThingAPN name.
+func ConvertAPNToThingAPN(apn string) string {
+	apn = strings.ReplaceAll(apn, "DAIKIN:", "")
+	if len(apn) < 12 {
+		return apn
+	}
+	var sb strings.Builder
+	sb.WriteString("DAIKIN")
+	sb.WriteString(apn[4:6])
+	sb.WriteString(apn[2:4])
+	sb.WriteString(apn[0:2])
+	return sb.String()
+}

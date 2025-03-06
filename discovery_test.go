@@ -18,3 +18,9 @@ func TestDiscoveryDevices(t *testing.T) {
 		// Device Hostname=DAIKINXXAXX.local. IP=192.168.0.XX Port=80 APN=DAIKIN:XXAXXXXXXXXC
 	}
 }
+
+func TestConvertAPNToThingAPN(t *testing.T) {
+	t.Parallel()
+	r := ConvertAPNToThingAPN("DAIKIN:23A11100000C")
+	require.Equal(t, "DAIKIN11A123", r)
+}

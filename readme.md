@@ -65,6 +65,15 @@ Deve ser compatível com todos os aparelhos que utilizam o aplicativo **Daikin S
 | FTKR50U |
 | FTKR60U |
 
+### Home Assistant
+
+Durante o processo de criação de integrações para o Home Assistant baseada no código desse repositório,
+a Daikin liberou uma integração oficialmente criada por eles, caso seu objetivo seja utilizar com Home Assistant,
+consulte os seguintes links:
+
+- https://github.com/daikin-br/ha-custom-integration
+- https://github.com/crossworth/daikin/issues/1#issuecomment-2704348561
+
 ### Conseguindo uma `secret key`
 
 O primeiro passo é configurar o ar utilizando o aplicativo oficial, durante o processo de configuração é criado
